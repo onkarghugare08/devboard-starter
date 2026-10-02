@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: devboard-backend-deployment
+  namespace: devboard
   labels:
-    app: devboard-be
-  namespace: devboard-ns
+    app: devboard-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: devboard-be
+      app: devboard-backend
   template:
     metadata:
       labels:
-        app: devboard-be
+        app: devboard-backend
     spec:
       containers:
       - name: devboard-backend
-        image: trainwithshubham/devboard-backend:latest
+        image: onkar1817/devboard-backend:latest
         ports:
         - containerPort: 8080
         env:
@@ -52,9 +52,7 @@ spec:
           requests: # minimum resource requirement
             cpu: 10m # 0.01 Cores of CPU
             memory: 64Mi # 67 Mb of RAM
-          
+
           limits: # maximum resource requirement
             cpu: 250m # 0.25 Cores of CPU
             memory: 128Mi
-
-
