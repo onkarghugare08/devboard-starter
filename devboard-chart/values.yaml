@@ -1,7 +1,7 @@
-namespace: devboard-ns
+namespace: devboard
 
 frontend:
-  image: trainwithshubham/devboard-frontend:latest
+  image: onkar1817/devboard-frontend:latest
   replicas: 1
   containerPort: 4173
   service:
@@ -17,7 +17,7 @@ frontend:
       memory: 128Mi
 
 backend:
-  image: trainwithshubham/devboard-backend:latest
+  image: onkar1817/devboard-backend:latest
   replicas: 1
   containerPort: 8080
   service:
@@ -38,10 +38,10 @@ postgres:
   storageClassName: manual
 
 config:
-  POSTGRES_USER: devboard
+  POSTGRES_USER: postgres
   POSTGRES_DB: devboard
   PORT: "8080"
 
 secrets:
-  # base64 for "devboard" — replace for real environments, this is a demo password
-  POSTGRES_PASSWORD: ZGV2Ym9hcmQ=
+  # base64 for "onkar03" — replace for real environments, this is a demo password
+  POSTGRES_PASSWORD: b25rYXIwMw==

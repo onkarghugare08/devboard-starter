@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
+  name: devboard-frontend-deployment
   namespace: {{ .Values.namespace }}
   labels:
-    app: devboard-fe
+    app: devboard-frontend
 spec:
   replicas: {{ .Values.frontend.replicas }}
   selector:
     matchLabels:
-      app: devboard-fe
+      app: devboard-frontend
   template:
     metadata:
       labels:
-        app: devboard-fe
+        app: devboard-frontend
     spec:
       containers:
         - name: devboard-frontend
