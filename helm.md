@@ -225,13 +225,13 @@ postgres:
   storageClassName: manual
 
 config:
-  POSTGRES_USER: devboard
+  POSTGRES_USER: postgres
   POSTGRES_DB: devboard
   PORT: "8080"
 
 secrets:
-  # base64 for "devboard" — replace for real environments, this is a demo password
-  POSTGRES_PASSWORD: ZGV2Ym9hcmQ=
+  # base64 for "onkar03" — replace for real environments, this is a demo password
+  POSTGRES_PASSWORD: b25rYXIwMw==
 ```
 
 ### 4.4 `templates/namespace.yaml`
