@@ -3,21 +3,21 @@ kind: Deployment
 metadata:
   name: backend-deployment
   labels:
-    app: devboard-be
-  namespace: devboard-ns
+    app: devboard-backend
+  namespace: devboard
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: devboard-be
+      app: devboard-backend
   template:
     metadata:
       labels:
-        app: devboard-be
+        app: devboard-backend
     spec:
       containers:
       - name: devboard-backend
-        image: trainwithshubham/devboard-backend:817b5cf
+        image: onkar1817/devboard-backend:817b5cf
         ports:
         - containerPort: 8080
         env:

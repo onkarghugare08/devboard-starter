@@ -2,9 +2,9 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: devboard-configmap
-  namespace: devboard-ns
+  namespace: devboard
 
 data:
-  POSTGRES_USER: devboard # plain text , no need to base64 encode
+  POSTGRES_USER:  postgres# plain text , no need to base64 encode
   POSTGRES_DB: devboard
   PORT: "8080"

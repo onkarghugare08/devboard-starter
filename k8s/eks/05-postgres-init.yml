@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: postgres-init
-  namespace: devboard-ns
+  namespace: devboard
 data:
   01_schema.sql: |
     -- DevBoard (advanced branch) — minimal schema: projects + tasks only.

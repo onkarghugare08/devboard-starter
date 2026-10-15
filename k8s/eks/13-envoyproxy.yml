@@ -6,7 +6,7 @@ apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: EnvoyProxy
 metadata:
   name: devboard-envoy-config
-  namespace: devboard-ns
+  namespace: devboard
 spec:
   provider:
     type: Kubernetes

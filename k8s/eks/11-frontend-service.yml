@@ -4,11 +4,11 @@ kind: Service
 apiVersion: v1
 metadata:
   name: frontend-service
-  namespace: devboard-ns
+  namespace: devboard
 
 spec:
   selector:
-    app: devboard-fe
+    app: devboard-frontend
 
   ports:
     - protocol: TCP
