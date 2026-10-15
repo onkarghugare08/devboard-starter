@@ -14,7 +14,7 @@ pull_request:
       - "backend/**"
       - "frontend/**"
       - ".github/workflows/devsecops-pipeline.yml"
-  workflow_dispatch: {}
+workflow_dispatch: {}
 
 permissions:
   contents: write
