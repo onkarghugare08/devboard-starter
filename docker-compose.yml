@@ -13,6 +13,7 @@
 services:
   postgres:
     image: postgres:16-alpine
+    container_name: devboard-postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -27,28 +28,37 @@ services:
       retries: 10
     ports:
       - "${POSTGRES_HOST_PORT}:5432"
+    networks:
+      -  webnet
 
   backend:
-    # build = local; image = the tag CI pushes and CD pulls (IMAGE_TAG, else latest).
     build: ./backend
-    image: trainwithshubham/devboard-backend:${IMAGE_TAG:-latest}
+    image: onkar1817/devboard-backend  
+    container_name: devboard-backend
     environment:
       PORT: "${BACKEND_PORT}"
-      # Built from the Postgres vars above so the credentials live in one place.
       POSTGRES_URL: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable"
     depends_on:
       postgres:
         condition: service_healthy
     ports:
-      - "${BACKEND_HOST_PORT}:${BACKEND_PORT}"   # host:container — direct curl/debug; the UI uses the gateway
-
+      - "${BACKEND_HOST_PORT}:${BACKEND_PORT}" 
+    networks:
+      -  webnet
+    
   frontend:
     build: ./frontend
-    image: trainwithshubham/devboard-frontend:${IMAGE_TAG:-latest}
+    image: onkar1817/devboard-frontend
+    container_name: devboard-frontend
     depends_on:
       - backend
     ports:
-      - "${FRONTEND_HOST_PORT}:4173"   # vite preview serves on 4173 inside the container
+      - "${FRONTEND_HOST_PORT}:4173"  
+    networks:
+      -  webnet
 
 volumes:
   pgdata:
+
+networks:
+    webnet:
