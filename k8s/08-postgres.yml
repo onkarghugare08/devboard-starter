@@ -25,11 +25,13 @@ spec:
         - containerPort: 5432
           name: web
         volumeMounts:
-        - name: pgdata
+        - name: pgdata                             # 1. FIXED: Case-matched with volumeClaimTemplates below
           mountPath: /var/lib/postgresql/data
         - name: init
           mountPath: /docker-entrypoint-initdb.d
         env:
+          - name: PGDATA                           # 2. FIXED: Instructs Postgres to use a clean subfolder
+            value: /var/lib/postgresql/data/db
           - name: POSTGRES_USER
             valueFrom:
               configMapKeyRef:
@@ -59,7 +61,7 @@ spec:
             name: postgres-init
   volumeClaimTemplates:
   - metadata:
-      name: pgdata
+      name: pgdata                                 # This stays lowercase
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: "manual"
