@@ -8,13 +8,13 @@ on:
       - "frontend/**"
       - "k8s/eks/**"
       - ".github/workflows/devsecops-pipeline.yml"
-pull_request:
+ pull_request:
     branches: [main]
     paths:
       - "backend/**"
       - "frontend/**"
       - ".github/workflows/devsecops-pipeline.yml"
-workflow_dispatch: {}
+ workflow_dispatch: {}
 
 permissions:
   contents: write
