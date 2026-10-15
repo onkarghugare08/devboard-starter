@@ -12,8 +12,8 @@ permissions:
   security-events: write
 
 env:
-  BACKEND_IMAGE: trainwithshubham/devboard-backend
-  FRONTEND_IMAGE: trainwithshubham/devboard-frontend
+  BACKEND_IMAGE: onkar1817/devboard-backend
+  FRONTEND_IMAGE: onkar1817/devboard-frontend
 
 jobs:
   trivy:
@@ -23,12 +23,12 @@ jobs:
       matrix:
         include:
           - name: backend
-            image: trainwithshubham/devboard-backend
+            image: onkar1817/devboard-backend
           - name: frontend
-            image: trainwithshubham/devboard-frontend
+            image: onkar1817/devboard-frontend
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Run Trivy vulnerability scanner on ${{ matrix.name }} image
         continue-on-error: true

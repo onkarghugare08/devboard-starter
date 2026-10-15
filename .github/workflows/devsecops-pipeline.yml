@@ -1,14 +1,14 @@
 name: DevSecOps Pipeline
 
 on:
-  push:
+ push:
     branches: [main]
     paths:
       - "backend/**"
       - "frontend/**"
       - "k8s/eks/**"
       - ".github/workflows/devsecops-pipeline.yml"
-  pull_request:
+pull_request:
     branches: [main]
     paths:
       - "backend/**"

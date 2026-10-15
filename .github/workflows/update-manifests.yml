@@ -9,15 +9,15 @@ on:
         type: string
 
 env:
-  BACKEND_IMAGE: trainwithshubham/devboard-backend
-  FRONTEND_IMAGE: trainwithshubham/devboard-frontend
+  BACKEND_IMAGE: onkar1817/devboard-backend
+  FRONTEND_IMAGE: onkar1817/devboard-frontend
 
 jobs:
   update-manifests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
