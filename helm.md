@@ -185,10 +185,10 @@ appVersion: "1.0.0"
 
 ### 4.3 `values.yaml`
 ```yaml
-namespace: devboard-ns
+namespace: devboard
 
 frontend:
-  image: trainwithshubham/devboard-frontend:latest
+  image: onkar1817/devboard-frontend:latest
   replicas: 1
   containerPort: 4173
   service:
@@ -204,7 +204,7 @@ frontend:
       memory: 128Mi
 
 backend:
-  image: trainwithshubham/devboard-backend:latest
+  image: onkar1817/devboard-backend:latest
   replicas: 1
   containerPort: 8080
   service:
@@ -220,7 +220,7 @@ backend:
 postgres:
   image: postgres:16-alpine
   storage: 0.5Gi
-  pvHostPath: /mnt/pg-data
+  pvHostPath: /mnt/pg-data/pgdata
   pvStorage: 1Gi
   storageClassName: manual
 
@@ -394,19 +394,19 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: devboard-backend-deployment
   namespace: {{ .Values.namespace }}
   labels:
-    app: devboard-be
+    app: devboard-backend
 spec:
   replicas: {{ .Values.backend.replicas }}
   selector:
     matchLabels:
-      app: devboard-be
+      app: devboard-backend
   template:
     metadata:
       labels:
-        app: devboard-be
+        app: devboard-backend
     spec:
       containers:
         - name: devboard-backend
@@ -449,7 +449,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    app: devboard-be
+    app: devboard-backend
   ports:
     - protocol: TCP
       port: {{ .Values.backend.service.port }}
@@ -461,19 +461,19 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
+  name: devboard-frontend-deployment
   namespace: {{ .Values.namespace }}
   labels:
-    app: devboard-fe
+    app: devboard-frontend
 spec:
   replicas: {{ .Values.frontend.replicas }}
   selector:
     matchLabels:
-      app: devboard-fe
+      app: devboard-frontend
   template:
     metadata:
       labels:
-        app: devboard-fe
+        app: devboard-frontend
     spec:
       containers:
         - name: devboard-frontend
@@ -489,11 +489,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
+  name: frontend
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    app: devboard-fe
+    app: devboard-frontend
   ports:
     - protocol: TCP
       port: {{ .Values.frontend.service.port }}
@@ -509,19 +509,19 @@ spec:
 helm lint devboard-chart
 helm template devboard-chart               # sanity-check rendered manifests
 
-helm install devboard devboard-chart --create-namespace -n devboard-ns
+helm install devboard devboard-chart --create-namespace -n devboard
 
 # check
-kubectl get all -n devboard-ns
+kubectl get all -n devboard
 
 # access frontend (NodePort 30001) -- if kind cluster has extraPortMappings, else port-forward:
-kubectl port-forward -n devboard-ns svc/frontend-service 8080:80
+kubectl port-forward -n devboard-ns svc/frontend 8080:80
 
 # upgrade (e.g. bump replicas)
-helm upgrade devboard devboard-chart -n devboard-ns --set frontend.replicas=2
+helm upgrade devboard devboard-chart -n devboard --set frontend.replicas=2
 
 # uninstall
-helm uninstall devboard -n devboard-ns
+helm uninstall devboard -n devboard
 ```
 
 **Verified on a real kind cluster (`v1.36.1`, matching `kind/kind-config.yaml`):**
