@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: devboard-backend
-        image: onkar1817/devboard-backend:817b5cf
+        image: onkar1817/devboard-backend:latest
         ports:
         - containerPort: 8080
         env:
