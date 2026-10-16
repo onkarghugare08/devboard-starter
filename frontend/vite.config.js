@@ -12,6 +12,7 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173,
+    allowedHosts: true, // Allows access via AWS Load Balancer during local dev
     proxy: {
       '/api': {
         target: 'http://localhost:8080',
@@ -21,6 +22,7 @@ export default defineConfig({
     },
   },
   preview: {
+    allowedHosts: true, // Allows access via AWS Load Balancer in the Docker container
     proxy: {
       '/api': {
         // `backend` is the compose service name; 8080 is its container port and
